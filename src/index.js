@@ -1,11 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Counter from './Counter';
-
-const styles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center',
-};
+import Styles from "./Styles.css";
 
 const App = () => (<Counter />);
 

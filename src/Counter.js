@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
 
-import Store from "./Store";
+import { createStore } from "redux";
 
 const initalState = { count: 0 };
-function updateState(state, action) {
+function updateState(state = { count: 0 }, action) {
   switch (action.type) {
     case "INCREMENT": {
       return { count: state.count + action.amount };
@@ -21,11 +21,17 @@ function updateState(state, action) {
   }
 }
 
-const incrementAction = { type: "INCREMENT", amount: 1 };
-const decrementAction = { type: "DECREMENT", amount: 1 };
-const resetAction = { type: "RESET", amount: 0 };
+function incrementAction(amount) {
+  return { type: "INCREMENT", amount: amount };
+}
+function decrementAction(amount) {
+  return { type: "DECREMENT", amount: amount };
+}
+function resetAction() {
+  return { type: "RESET", amount: 0 };
+}
 
-const store = new Store(updateState, initalState);
+const store = createStore(updateState, initalState);
 
 class Counter extends React.Component {
   constructor(props) {
@@ -41,21 +47,24 @@ class Counter extends React.Component {
   }
 
   increment() {
-    store.update(incrementAction);
+    let amount = parseInt(this.refs.amount.value || 1);
+    store.dispatch(incrementAction(amount));
   }
 
   decrement() {
-    store.update(decrementAction);
+    let amount = parseInt(this.refs.amount.value || 1);
+    store.dispatch(decrementAction(amount));
   }
 
   reset() {
-    store.update(resetAction);
+    store.dispatch(resetAction());
   }
 
   render() {
+    const count = store.getState().count;
     return (
       <div className="counter">
-        <span className="count">{store.state.count}</span>
+        <span className="count">{count}</span>
 
         <div className="buttons">
           <button className="increment" onClick={this.increment}>
@@ -65,9 +74,11 @@ class Counter extends React.Component {
             -
           </button>
           <button className="reset" onClick={this.reset}>
-            Reset
+            R
           </button>
         </div>
+
+        <input type="number" ref="amount" defaultValue="1" />
       </div>
     );
   }

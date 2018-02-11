@@ -1,0 +1,38 @@
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+
+  border: solid 1px darkgray;
+  border-radius: 10px;
+  background: lightblue;
+  box-shadow: -2px 2px 2px -2px rgba(0, 0, 0, 0.3);
+}
+
+.count {
+  font-size: 72px;
+}
+
+.buttons {
+  margin: 10px;
+}
+
+button {
+  background: purple;
+  font-size: 32px;
+  border: solid 1px darkgray;
+  border-radius: 5px;
+  margin: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: darkgray;
+}
+
+input {
+  font-size: 16px;
+  max-width: 100px;
+  border: solid 1px darkgray;
+  border-radius: 5px;
+}
