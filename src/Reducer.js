@@ -15,11 +15,9 @@ const store = new Store(updateState, 0);
 const incrementAction = { type: "INCREMENT", amount: 5 };
 const decrementAction = { type: "DECREMENT", amount: 3 };
 
+const unsubscribe = store.subscribe(()=> console.log("State was chnaged", store.state));
+
 store.update(incrementAction);
-console.log(store.state);
-
+unsubscribe();
 store.update(decrementAction);
-console.log(store.state);
-
 store.update({});
-console.log(store.state);
